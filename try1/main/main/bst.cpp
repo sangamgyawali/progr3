@@ -7,13 +7,13 @@
 #include<sstream>
 #include <map>
 #include<algorithm>
+#include <vector>
 
 using namespace std;
 
 bst::bst() //constructor
 {
-	
-
+	root = nullptr;
 }
 
 //insert function
@@ -23,7 +23,7 @@ bool bst::Insert(Node*& root, string data, int count)
 	{
 		root = new Node();
 		root->data = data;
-		root->count_item;
+		root->count_item += count;
 		return true;
 	}
 	if (data > root->data)
@@ -38,7 +38,6 @@ bool bst::Insert(Node*& root, string data, int count)
 		return false;
 	
 }
-
 
 bool bst::del(Node*& root, string data) {
 	if (root == NULL)
@@ -73,6 +72,7 @@ bool bst::del(Node*& root, string data) {
 		}
 		else
 		{// need the source citation here
+			//https://gist.github.com/mycodeschool/9465a188248b624afdbf
 			Node* temp = FindMin(root->right);
 			root->data = temp->data;
 			root->count_item = temp->count_item;
@@ -80,9 +80,6 @@ bool bst::del(Node*& root, string data) {
 		}
 	}
 	return true;
-
-
-
 }
 
 Node * bst::FindMin(Node * root)
@@ -92,13 +89,12 @@ Node * bst::FindMin(Node * root)
 	return root;
 }
 
-
 void bst::inDisplay(Node*& root)
 {
 	if (!root)
 		return;
 	inDisplay(root->left);
-	cout << root->data << endl;
+	cout << root->data <<"  "<<root->count_item<< endl;
 	inDisplay(root->right);
 }
 
@@ -110,64 +106,19 @@ void bst::postDisplay(Node*& root)
 
 	postDisplay(root->left);
 	postDisplay(root->right);
-	cout << root->data << endl;
+	cout << root->data << "  " << root->count_item << endl;
 }
 void bst::preDisplay( Node*& root)
 {
 	if (root == NULL)
 		return;
 
-	cout << root->data << endl;
+	cout << root->data << "  " << root->count_item << endl;
 
 	preDisplay(root->left);
 	preDisplay(root->right);
 }
 
-void bst::load() {
-	int count;
-	string str, input1, input2, input3, input4, input5;
-	Node *root = NULL;
-
-
-
-
-	// implementing functions
-	while (input1 != "exit") {
-		if (input1 == "load") {
-			string fileName = input2;
-			fstream inFile;
-			inFile.open(fileName);
-
-			if (!inFile.is_open()) {
-				cout << "File not found ";
-			}
-			else {
-				while (getline(inFile, str)) {
-					stringstream ss(str);
-					getline(ss, input1, ' ');
-					getline(ss, input2, ' ');
-					getline(ss, input3, ' ');
-					getline(ss, input4, ' ');
-					getline(ss, input5, ' ');
-					try {
-						count = stoi(input3);
-					}
-					catch (...) {
-						cout << "count level conversion failure" << endl;
-					}
-
-					allFunctions(input1, input2, input3, input4, input5);
-				}
-				inFile.close();
-
-			}
-		}
-		else {
-			cout << "Command Unidentified, refer to the top" << endl;
-		}
-		recurFunc(input1, input2, input3, input4, input5);
-	}
-}
 
 bool bst::found(Node*& root, string data)
 {
@@ -186,4 +137,3 @@ bool bst::found(Node*& root, string data)
 		return found(root, data);
 	}
 }
-

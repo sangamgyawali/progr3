@@ -9,8 +9,8 @@ public:
 	Node() {
 		left= right = nullptr;
 	}
-	string data="";
-	int count_item=0;
+	string data;
+	 int count_item=0;
 };
 class bst
 	
@@ -27,7 +27,8 @@ private:
 	void postDisplay(Node*& root);
 public:
 	string name;
-	int count_item;
+	int count() { return root->count_item; }
+	string data() { return root->data; }
 	bst();
 	bool Insert(std::string data, int count) { return Insert(root, data, count); }
 	bool found(std::string data) { return found(root, data); }
@@ -35,5 +36,5 @@ public:
 	void inDisplay() { inDisplay(root); }
 	void preDisplay() { preDisplay(root); }
 	void postDisplay() { postDisplay(root); }
-	void allFunctions(string input1, string input2, int input3, string input4, string input5);	
+	//void allFunctions(string input1, string input2, string input3, string input4, string input5);	
 };
